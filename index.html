@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FURRPAWs</title>
+  <link rel="icon" href="photo/logo.PNG">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f2eb;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    header {
+      position: absolute;
+      /* Position header on top of the welcome section */
+      top: 0;
+      /* Align it to the top of the welcome-section */
+      left: 0;
+      /* Align it to the left */
+      right: 0;
+      /* Stretch it across */
+      z-index: 10;
+      /* Ensure the header appears above the image */
+      padding: 2% 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    nav {
+      flex: 1;
+      display: flex;
+      margin-left: 45%;
+      gap: 30px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: bold;
+    }
+
+    /* Logo styling */
+    .logo {
+      position: absolute;
+      left: 20px;
+      top: 50px;
+      transform: translateY(-50%);
+      z-index: 1;
+    }
+
+    .logo img {
+      width: 80px;
+      height: 80px;
+    }
+
+    /* Adjust header navigation and buttons */
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: black;
+      font-size: 16px;
+      padding: 10px;
+    }
+
+    nav a:hover {
+      color: #333;
+    }
+
+    /* Sign In Button */
+    .sign-in {
+      margin-right: 50px;
+    }
+
+    .sign-in button {
+      padding: 10px 20px;
+      font-size: 16px;
+      color: white;
+      background-color: #007bff;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    .sign-in button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .logo {
+        left: 15px;
+        top: 23px;
+      }
+
+      .nav-links {
+        gap: 20px;
+      }
+
+      nav a {
+        font-size: 15px;
+        padding: 8px;
+      }
+
+      .sign-in button {
+        font-size: 15px;
+        padding: 8px 16px;
+        margin-left: 30px;
+      }
+    }
+
+    @media (max-width: 768px) {
+
+      .gallery-grid img:nth-child(1),
+      .gallery-grid img:nth-child(2),
+      .gallery-grid img:nth-child(3) {
+        display: none;
+      }
+
+      nav {
+        flex-direction: column;
+        margin-left: 105px;
+        gap: 20px;
+      }
+
+      .nav-links {
+        flex-direction: row;
+        gap: 15px;
+
+      }
+
+      nav a {
+        font-size: 14px;
+        padding: 8px;
+      }
+
+      .sign-in button {
+        font-size: 14px;
+        padding: 8px 16px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .logo img {
+        width: 30px;
+        height: 30px;
+      }
+
+      .nav-links {
+        gap: 10px;
+      }
+
+      nav a {
+        font-size: 12px;
+        padding: 6px;
+      }
+
+      .sign-in button {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+    }
+
+    /* Welcome Image Section */
+    .welcome-section {
+      text-align: center;
+      margin-top: 0px;
+
+      position: relative;
+      /* Ensures proper positioning for child elements */
+    }
+
+    /* Style for the image */
+    .welcome-section img {
+      width: 100%;
+      /* On large screens, image will fill the entire width */
+      height: auto;
+      /* Maintain aspect ratio */
+      display: block;
+      margin: 0 auto;
+      /* Center the image horizontally */
+    }
+
+    /* Media query for mobile */
+    @media screen and (max-width: 768px) {
+      .welcome-section {
+        height: 200px;
+        /* Set a fixed height for mobile version */
+      }
+
+      .welcome-section img {
+        width: auto;
+        /* Maintain aspect ratio */
+        height: 100%;
+        /* Image will fill the container's height */
+        max-width: 90%;
+        /* Limit the image's max width */
+        margin: 0 auto;
+        /* Center the image */
+        margin-top: 40px;
+      }
+    }
+
+    /* Media query for desktop (above 768px) */
+    @media screen and (min-width: 769px) {
+      .welcome-section img {
+        width: 100%;
+        /* Image will fill the screen */
+        height: auto;
+        /* Maintain aspect ratio */
+      }
+    }
+
+    /* Image Zoom Section */
+    .image-zoom-section {
+      display: flex;
+      flex-wrap: wrap;
+      /* Allow items to wrap on smaller screens */
+      justify-content: space-around;
+      margin: 20px auto;
+      /* Center and space above and below */
+      width: 80%;
+    }
+
+    .image-container {
+      flex: 1 1 250px;
+      /* Flexible item with minimum width of 250px */
+      margin: 15px;
+      background-color: #f7f7f7;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      /* Smooth zoom on container hover */
+    }
+
+    .zoom-image {
+      width: 100%;
+      height: auto;
+      transition: transform 0.3s ease;
+      border-radius: 10px;
+    }
+
+    .image-container:hover .zoom-image {
+      transform: scale(1.1);
+      /* Zoom in on hover */
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1024px) {
+      .image-zoom-section {
+        width: 90%;
+        /* Increase width for medium screens */
+      }
+
+      .image-container {
+        flex: 1 1 200px;
+        /* Smaller minimum width */
+      }
+    }
+
+    @media (max-width: 768px) {
+      .image-zoom-section {
+        width: 95%;
+        /* Full width for small screens */
+      }
+
+      .image-container {
+        flex: 1 1 150px;
+        /* Further reduce minimum width */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .image-zoom-section {
+        flex-direction: column;
+        /* Stack images vertically */
+        align-items: center;
+      }
+
+      .image-container {
+        width: 80%;
+        /* Fixed width for very small screens */
+        flex: none;
+        /* Remove flex-grow to center each item */
+      }
+    }
+
+
+    /* Footer styling */
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+    }
+
+    footer img {
+      width: 24px;
+      vertical-align: middle;
+    }
+
+    .services {
+      width: 90%;
+      max-width: 100%;
+      margin: auto;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      font-size: 4rem;
+      margin-bottom: 40px;
+    }
+
+    .service-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid #000;
+      margin-bottom: 40px;
+    }
+
+    .service-name,
+    .service-price {
+      font-size: 1.6rem;
+      margin-bottom: 40px;
+    }
+
+    .service-price {
+      color: #333;
+    }
+
+    .book-btn {
+      padding: 8px 16px;
+      font-size: 1.6rem;
+      border: 1px solid #000;
+      background-color: transparent;
+      cursor: pointer;
+
+    }
+
+    .book-btn:hover {
+      background-color: #000;
+      color: #fff;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .service-item {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .service-name,
+      .service-price,
+      .book-btn {
+        margin: 5px 0;
+      }
+    }
+
+    .gallery {
+      width: 70%;
+      max-width: 800px;
+      padding: 30px;
+      margin: auto;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 80px;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 30px;
+      color: #555;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: transform 0.3s;
+    }
+
+    .gallery-grid img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Popup Modal */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .popup-content {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 5px;
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 30px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header Section -->
+  <header>
+    <div class="logo">
+      <img src="photo/logo.PNG" alt="Travel Logo">
+    </div>
+    <nav>
+      <div class="nav-links">
+        <a href="index.php">HOME</a>
+        <a href="#">ABOUT</a>
+        <a href="booking.php">BOOKING</a>
+      </div>
+    </nav>
+
+    <div class="sign-in">
+      <a href="login.php">
+        <button>LOGIN</button>
+      </a>
+    </div>
+  </header>
+
+  <!-- Welcome Section -->
+  <div class="welcome-section">
+    <img src="photo/home wall copy.jpg" alt="Welcome Image">
+  </div>
+
+  <!-- Image Zoom Section -->
+  <div class="image-zoom-section">
+    <div class="image-container">
+      <img src="photo/FOOD1.JPG" alt="Image 2" class="zoom-image">
+    </div>
+    <div class="image-container">
+      <img src="photo/ACCESS1.JPG" alt="Image 3" class="zoom-image">
+    </div>
+  </div>
+
+  <section class="services">
+    <h2>Services</h2>
+    <div class="service-item">
+      <span class="service-name">Full Grooming</span>
+      <span class="service-price">$80</span>
+      <button class="book-btn">Book Now</button>
+    </div>
+    <div class="service-item">
+      <span class="service-name">Bath & Blow Dry</span>
+      <span class="service-price">$50</span>
+      <button class="book-btn">Book Now</button>
+    </div>
+    <div class="service-item">
+      <span class="service-name">Nail Trimming</span>
+      <span class="service-price">$20</span>
+      <button class="book-btn">Book Now</button>
+    </div>
+  </section>
+
+  <section class="gallery">
+    <h2>Customer Gallery</h2>
+    <div class="gallery-grid">
+      <img src="photo/336185551_765382951792605_912265223541059280_n.jpg" alt="Gallery Image 1" onclick="openPopup(this.src)">
+      <img src="photo/336375121_241946611596456_7942267167915444855_n.jpg" alt="Gallery Image 2" onclick="openPopup(this.src)">
+      <img src="photo/336691341_1634730360309432_5065542022444015116_n.jpg" alt="Gallery Image 3" onclick="openPopup(this.src)">
+      <img src="photo/336903752_546376347620790_2537404421811494593_n.jpg" alt="Gallery Image 4" onclick="openPopup(this.src)">
+      <img src="photo/337044886_238493471910211_6015101334704547963_n.jpg" alt="Gallery Image 5" onclick="openPopup(this.src)">
+      <img src="photo/336350758_520220036852709_4340808491245158342_n.jpg" alt="Gallery Image 6" onclick="openPopup(this.src)">
+      <img src="photo/336690043_187245357380199_8822464454114668371_n _1_.jpg" alt="Gallery Image 7" onclick="openPopup(this.src)">
+      <img src="photo/337279193_3333824443600463_9205964085865435841_n _1_.jpg" alt="Gallery Image 8" onclick="openPopup(this.src)">
+    </div>
+  </section>
+
+  <!-- Popup Modal -->
+  <div id="popup" class="popup">
+    <span class="close" onclick="closePopup()">&times;</span>
+    <img class="popup-content" id="popup-img">
+  </div>
+
+
+  <!-- Footer Section -->
+  <footer>
+    <p>© Copyright Furrpaws 2024</p>
+    <a href="https://www.facebook.com/alvinmancera13" target="_blank">
+      <img src="photo/1314170_facebook_internet_logo_network_sign_icon.png" alt="Facebook Logo"> Follow us on Facebook
+    </a>
+  </footer>
+
+  <script>
+    let slideIndex = 0;
+        const slides = document.querySelector('.slides');
+
+        function moveSlide(direction) {
+            const slideWidth = document.querySelector('.slider').offsetWidth;
+            slideIndex += direction;
+            if (slideIndex < 0) {
+                slideIndex = slides.children.length - 1;
+            } else if (slideIndex >= slides.children.length) {
+                slideIndex = 0;
+            }
+            slides.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
+        }
+
+        function openPopup(src) {
+  document.getElementById("popup").style.display = "flex";
+  document.getElementById("popup-img").src = src;
+}
+
+function closePopup() {
+  document.getElementById("popup").style.display = "none";
+}
+
+  </script>
+
+</body>
+
+</html>
